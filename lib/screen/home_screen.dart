@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                             fontWeight: FontWeight.w300),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 50),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
