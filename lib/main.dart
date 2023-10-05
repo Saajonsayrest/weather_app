@@ -45,7 +45,8 @@ class MyApp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator.adaptive(),
-                  Text('Turn on Location')
+                  SizedBox(height: 5),
+                  Text('Checking Location Permission')
                 ],
               )),
             );

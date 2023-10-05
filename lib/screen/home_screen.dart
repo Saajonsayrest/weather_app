@@ -6,8 +6,47 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String getWeatherIcon(int code) {
+    switch (code) {
+      case > 200 && <= 300:
+        return 'assets/1.png';
+      case >= 300 && < 400:
+        return 'assets/2.png';
+      case >= 500 && < 600:
+        return 'assets/3.png';
+      case >= 600 && < 700:
+        return 'assets/4.png';
+      case >= 700 && < 800:
+        return 'assets/5.png';
+      case == 800:
+        return 'assets/6.png';
+      case > 800 && <= 804:
+        return 'assets/7.png';
+
+      default:
+        return 'assets/7.png';
+    }
+  }
+
+  String getGreeting(int hour) {
+    String greeting = '';
+
+    if (hour >= 0 && hour < 12) {
+      return greeting = 'Good morning';
+    } else if (hour >= 12 && hour < 17) {
+      return greeting = 'Good afternoon';
+    } else {
+      return greeting = 'Good evening';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +55,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: PreferredSize(
-        preferredSize: Size(width, 25),
+        preferredSize: Size(width, 20),
         child: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -78,15 +117,18 @@ class HomeScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w300),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Good Morning',
-                            style: TextStyle(
+                          Text(
+                            getGreeting(state.weather.date!.hour),
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25),
                           ),
                           Center(
-                              child: Image.asset('assets/4.png', height: 300)),
+                              child: Image.asset(
+                                  getWeatherIcon(
+                                      state.weather.weatherConditionCode!),
+                                  height: 300)),
                           Center(
                             child: Text(
                               '${state.weather.temperature!.celsius!.round()}℃',
