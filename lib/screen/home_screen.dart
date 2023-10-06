@@ -14,7 +14,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String getWeatherIcon(int code) {
+  String greeting = '';
+
+  String getWeatherIcon(
+      int code, DateTime current, DateTime sunrise, DateTime sunset) {
     switch (code) {
       case > 200 && <= 300:
         return 'assets/1.png';
@@ -27,9 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
       case >= 700 && < 800:
         return 'assets/5.png';
       case == 800:
-        return 'assets/6.png';
+        return current.isAfter(sunrise) && current.isBefore(sunset)
+            ? 'assets/6.png'
+            : 'assets/12.png';
       case > 800 && <= 804:
-        return 'assets/7.png';
+        return current.isAfter(sunrise) && current.isBefore(sunset)
+            ? 'assets/7.png'
+            : 'assets/15.png';
 
       default:
         return 'assets/7.png';
@@ -37,14 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String getGreeting(int hour) {
-    String greeting = '';
-
     if (hour >= 0 && hour < 12) {
-      return greeting = 'Good morning';
+      return greeting = 'Good Morning';
     } else if (hour >= 12 && hour < 17) {
-      return greeting = 'Good afternoon';
+      return greeting = 'Good Afternoon';
     } else {
-      return greeting = 'Good evening';
+      return greeting = 'Good Evening';
     }
   }
 
@@ -127,7 +132,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           Center(
                               child: Image.asset(
                                   getWeatherIcon(
-                                      state.weather.weatherConditionCode!),
+                                      state.weather.weatherConditionCode!,
+                                      state.weather.date!,
+                                      state.weather.sunrise!,
+                                      state.weather.sunset!),
                                   height: 300)),
                           Center(
                             child: Text(
