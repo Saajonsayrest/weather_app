@@ -42,14 +42,8 @@ class MyApp extends StatelessWidget {
           } else {
             return const Scaffold(
               body: Center(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator.adaptive(),
-                  SizedBox(height: 5),
-                  Text('Checking Location Permission..')
-                ],
-              )),
+                child: CircularProgressIndicator.adaptive(),
+              ),
             );
           }
         },

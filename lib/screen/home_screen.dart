@@ -49,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is WeatherBlocSuccess) {
                   return WeatherInfoWidget(weather: state.weather);
                 } else {
-                  return Container();
+                  return const Center(
+                      child: CircularProgressIndicator.adaptive());
                 }
               },
             )
