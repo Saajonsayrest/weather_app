@@ -20,7 +20,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,7 +51,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//Copy the entire determine Position fro Geolocator Documentation
+//Copy the entire determine Position fro Geolocator Documentation(permission_handler is used to ask location permission instead of default LocationPermission from documentation)
 Future<Position> _determinePosition(BuildContext context) async {
   var status = await Permission.location.request();
 
@@ -77,11 +76,9 @@ Future<Position> _determinePosition(BuildContext context) async {
     );
 
     if (status.isDenied) {
-      // Permissions are still denied, you can handle it accordingly.
       return Future.error('Location permissions are denied');
     }
   } else if (status.isPermanentlyDenied) {
-    // Permissions are permanently denied, handle accordingly.
     return Future.error(
         'Location permissions are permanently denied, we cannot request permissions.');
   }
